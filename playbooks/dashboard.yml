@@ -37,15 +37,3 @@
           - kind: ServiceAccount
             name: kubernetes-dashboard
             namespace: kubernetes-dashboard
-
-  - name: get token
-    shell: kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | awk '/^deployment-controller-token-/{print $1}') | awk '$1=="token:"{print $2}'
-    register: kube_token
-    changed_when: false
-
-  - name: add token to ~/.kube/config
-    blockinfile:
-      path: ~/.kube/config
-      state: present
-      block: |4
-              token: {{ kube_token.stdout }}

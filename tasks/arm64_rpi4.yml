@@ -1,8 +1,0 @@
----
-- name: enable aarch64+ on rpi 4
-  lineinfile:
-    path: /boot/config.txt
-    state: present
-    insertafter: '^[pi4]'
-    line: amd_64=1
-  notify: reboot

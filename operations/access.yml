@@ -1,0 +1,22 @@
+---
+- name: Setup access for localhost
+  hosts: masters
+  become: true
+  tasks:
+    - name: create local .kube/config
+      fetch:
+        src: /etc/kubernetes/admin.conf
+        dest: ~/.kube/config
+        flat: true
+
+    - name: get dashboard token
+      shell: kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | awk '/^deployment-controller-token-/{print $1}') | awk '$1=="token:"{print $2}'
+      register: kube_token
+      changed_when: false
+
+    - name: add token to ~/.kube/config
+      blockinfile:
+        path: ~/.kube/config
+        state: present
+        block: |4
+                token: {{ kube_token.stdout }}

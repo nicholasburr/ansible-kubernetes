@@ -1,37 +1,14 @@
 ---
 - hosts: all
   become: true
-
   pre_tasks:
-    - import_tasks: tasks/arm64_rpi4.yml
     - import_tasks: tasks/cmdline_setup.yml
-    - import_tasks: tasks/disable_swap.yml
-
-    - name: flush handlers before installing kubernetes
-      meta: flush_handlers
 
   roles:
-    - role: ansible-role-security
-    - role: nicholasburr.common
-      #    - role: nicholasburr.security
-      #    - role: nicholasburr.docker_ce
-      #    - role: nicholasburr.kubernetes
-
-  tasks:
-    - name: create local .kube/config
-      fetch:
-        src: /etc/kubernetes/admin.conf
-        dest: ~/.kube/config
-        flat: true
-      when: kubernetes_cluster_role == 'master'
-
-#- import_playbook: playbooks/metallb.yml
-#
-#- import_playbook: playbooks/dashboard.yml
-#  when: pik8s_cluster_role == 'master'
-#
+    - role: nicholasburr.meta
+    - role: nicholasburr.docker_ce
+    - role: nicholasburr.kubernetes
 
   handlers:
     - name: reboot
       reboot:
-        reboot_timeout: 120

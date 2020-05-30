@@ -1,4 +1,3 @@
-- src: nicholasburr.common
-  #- src: nicholasburr.security
+- src: nicholasburr.meta
 - src: nicholasburr.docker_ce
 - src: nicholasburr.kubernetes
