@@ -1,3 +1,5 @@
-- src: nicholasburr.meta
 - src: nicholasburr.docker_ce
 - src: nicholasburr.kubernetes
+- src: nicholasburr.meta
+- src: nicholasburr.nfs
+- src: nicholasburr.terraform
