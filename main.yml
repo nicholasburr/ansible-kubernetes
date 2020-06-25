@@ -6,8 +6,9 @@
 
   roles:
     - role: nicholasburr.meta
-    - role: nicholasburr.docker_ce
-    - role: nicholasburr.kubernetes
+#    - role: nicholasburr.nfs
+#    - role: nicholasburr.docker_ce
+#    - role: nicholasburr.kubernetes
 
   handlers:
     - name: reboot

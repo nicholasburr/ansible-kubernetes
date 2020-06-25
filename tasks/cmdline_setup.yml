@@ -2,8 +2,8 @@
 - name: enabling cgroup options
   lineinfile:
     path: /boot/firmware/cmdline.txt
-    line: 'cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
-    regexp: "(fixrtc)$"
-    backrefs: true
+    regexp: '^(.*fixrtc)$'
+    line: '\1 cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory'
     state: present
+    backrefs: true
   notify: reboot
